@@ -1,0 +1,87 @@
+{
+  "name": "alfasix/alfakit-workflows",
+  "description": "State machines and approval workflows for any model of an AlfaKit panel: transitions with guards, forms and policies, single, any-of, all-of and multi-level approvals with delegation, reminders and escalation, an approvals inbox, a history timeline and a workflow diagram.",
+  "keywords": [
+    "laravel",
+    "alfakit",
+    "workflow",
+    "state-machine",
+    "approvals",
+    "audit"
+  ],
+  "homepage": "https://alfakit.dev/docs/plugins/workflows",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alfa Six",
+      "homepage": "https://alfasixbh.com",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/alfasixbh/alfakit/issues",
+    "source": "https://github.com/alfasixbh/alfakit"
+  },
+  "require": {
+    "php": "^8.3",
+    "alfasix/alfakit": "^0.1|@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "AlfaSix\\AlfakitWorkflows\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AlfaSix\\AlfakitWorkflows\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "AlfaSix\\AlfakitWorkflows\\AlfakitWorkflowsServiceProvider"
+      ]
+    },
+    "alfakit": {
+      "version": "^0.1",
+      "frontend": null,
+      "showcase": {
+        "demoPath": "approvals",
+        "tour": [
+          "Open Sales > Approvals",
+          "Approve a pending return",
+          "Open the record's history timeline",
+          "View the workflow diagram"
+        ],
+        "clips": [
+          "react-light",
+          "react-dark",
+          "vue-light",
+          "vue-dark",
+          "svelte-light",
+          "svelte-dark"
+        ],
+        "worksWith": [
+          "kanban",
+          "comments",
+          "activity-log",
+          "invoices"
+        ],
+        "highlights": [
+          "State machines for any model",
+          "Transitions with guards, forms and policies",
+          "Single, any-of, all-of and multi-level approvals",
+          "Delegation, reminders and escalation",
+          "Approvals inbox",
+          "History timeline and diagram"
+        ]
+      }
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
