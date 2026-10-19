@@ -1,6 +1,8 @@
 # AlfaKit Workflows
 
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="../../../art/alfasix/alfa-six-micro-white.svg"><img src="../../../art/alfasix/alfa-six-micro-navy.svg" alt="" width="24" height="18" align="top"></picture> <sub>by <a href="https://alfasixbh.com">Alfa Six</a></sub></p>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/alfasixbh/alfakit/main/art/alfasix/alfa-six-micro-white.svg"><img src="https://raw.githubusercontent.com/alfasixbh/alfakit/main/art/alfasix/alfa-six-micro-navy.svg" alt="" width="24" height="18" align="top"></picture> <sub>by <a href="https://alfasixbh.com">Alfa Six</a></sub></p>
+
+> This is a read-only split of the [AlfaKit monorepo](https://github.com/alfasixbh/alfakit/tree/main/packages/plugins/workflows). Please open issues and pull requests there.
 
 State machines and approval workflows for any model of an [AlfaKit](https://alfakit.dev) panel: guarded, policy-checked transitions with forms and comments; single, any-of, all-of and multi-level approvals with due dates, reminders, delegation, reassignment and escalation; an approvals inbox with bulk approve; a history timeline; and an accessible workflow diagram drawn on the server. It renders in React, Vue and Svelte with AlfaKit's built-in components.
 
