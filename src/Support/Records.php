@@ -23,7 +23,7 @@ final class Records
         $panel = Context::panel();
         $resource = $panel?->getModelResource($record);
 
-        if ($resource !== null) {
+        if ($resource !== null && $resource::hasRecordTitle()) {
             try {
                 $title = $resource::getRecordTitle($record);
 
