@@ -108,6 +108,19 @@ it('asks for a confirmation or the comment field in the modal', function (): voi
         ->and(WorkflowLog::query()->where('event', WorkflowLog::TRANSITIONED)->sole()->comment)->toBe('Fixed it');
 });
 
+it('lists only the approval steps that apply to the record in the submit modal', function (): void {
+    $this->actingAs($this->user('Ada'));
+    $description = static function (Invoice $invoice): ?string {
+        $action = collect(WorkflowActions::make()->record($invoice)->getFlatActions())
+            ->first(static fn ($action): bool => $action->getName() === 'workflow_submit');
+
+        return $action?->record($invoice)->getModalDescription();
+    };
+
+    expect($description($this->invoice(500)))->toBe('This needs approval (Manager approval) before the record moves to Approved.')
+        ->and($description($this->invoice(5000)))->toBe('This needs approval (Manager approval → Finance approval) before the record moves to Approved.');
+});
+
 it('refuses a double submit of the same transition', function (): void {
     $this->actingAs($this->user('Ada'));
     $this->user('Bob', 'manager');
@@ -234,6 +247,19 @@ it('renders the timeline with transitions, comments and pending approvers', func
         ->toContain('Bob approved (Manager approval)')
         ->toContain('Submit approved')
         ->not->toContain('Waiting for approval');
+});
+
+it('renders the state entry with the built-in text entry', function (): void {
+    $this->actingAs($this->user('Ada'));
+    $invoice = $this->invoice(500);
+
+    $entry = collect(wfFlatten($this->pageProps('/workflows/invoices/'.$invoice->getKey())['content']))
+        ->first(fn (array $node): bool => ($node['name'] ?? $node['key'] ?? null) === 'state');
+
+    // A renderer only knows built-in types: `WorkflowStateEntry` would be an unknown component.
+    expect($entry)->not->toBeNull()
+        ->and($entry['type'])->toBe('TextEntry')
+        ->and($entry['badge'] ?? null)->toBeTrue();
 });
 
 it('hides the timeline from users who may not view the record', function (): void {

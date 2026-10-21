@@ -21,6 +21,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class WorkflowStateEntry extends TextEntry
 {
+    /** Rendered by the built-in text entry (a badge). */
+    protected ?string $type = 'TextEntry';
+
     public static function make(mixed ...$arguments): static
     {
         return parent::make(...($arguments === [] ? ['state'] : $arguments));

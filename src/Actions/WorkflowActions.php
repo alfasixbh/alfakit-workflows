@@ -342,9 +342,16 @@ class WorkflowActions extends ActionGroup
                     return $description;
                 }
 
-                if ($transition->requiresApprovalSteps()) {
+                // Only the steps that apply to this record (`onlyWhen()`): a 500 invoice
+                // isn't told it needs the finance step it will skip.
+                $steps = array_values(array_filter(
+                    $transition->getApprovalSteps(),
+                    static fn ($step): bool => $record === null || $step->appliesTo($record),
+                ));
+
+                if ($steps !== []) {
                     return (string) __('alfakit-workflows::workflows.actions.transition.approval_description', [
-                        'steps' => implode(' → ', array_map(static fn ($step): string => $step->getLabel(), $transition->getApprovalSteps())),
+                        'steps' => implode(' → ', array_map(static fn ($step): string => $step->getLabel(), $steps)),
                         'state' => (string) $workflow->getStateLabel($transition->getTo()),
                     ]);
                 }
